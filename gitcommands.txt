@@ -4,5 +4,4 @@ git init
 git add .
 git commit -m "Login page"
 git branch -M main
-git remote add origin https://github.com/csridge/shares-chettles-manager.git
 git push -u origin main
