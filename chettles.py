@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-
+import os
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///chess_inventory.db"
 db = SQLAlchemy(app)
@@ -34,8 +34,10 @@ def update_inventory():
     db.session.commit()
     return jsonify({"message": "Inventory updated"})
 @app.route("/")
+
 def home():
     return "Chess inventory is running!"
 
+port = int(os.environ.get("PORT", 5000))
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=port)
