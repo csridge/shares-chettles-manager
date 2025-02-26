@@ -2,6 +2,13 @@ from flask import Flask, request, jsonify, render_template
 import hashlib
 from flask_cors import CORS
 from users import users
+from flask import Blueprint
+
+login_app = Blueprint("login", __name__)
+
+@login_app.route("/login")
+def login():
+    return "Login page"
 
 app = Flask(__name__)
 CORS(app)

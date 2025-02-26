@@ -1,16 +1,15 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template
+from flask_cors import CORS
 from chettles import login_app  # Import the blueprint
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///chess_inventory.db"
-db = SQLAlchemy(app)
+CORS(app)
 
-# Import models after initializing `db`
-from inventory import Inventory  
+app.register_blueprint(login_app)  # Register the login blueprint
 
-# Register Blueprint
-app.register_blueprint(login_app)
+@app.route('/')
+def home():
+    return render_template("login.html")  # Serve login page
 
 if __name__ == "__main__":
     app.run(debug=True)
