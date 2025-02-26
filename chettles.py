@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+import threading
+import login
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///chess_inventory.db"
 db = SQLAlchemy(app)
@@ -36,7 +38,12 @@ def update_inventory():
 @app.route("/")
 
 def home():
-    return "Chess inventory is running!"
+    return "Welcome to shares chettles manager. One note: this website is using shares as the currency but shares chettles is not implemented into shares economy. Don't ask why it is using shares again"
+
+def run_login():
+    login.app.run(host="0.0.0.0", port=5000)
+
+threading.Thread(target=run_login, daemon=True).start()
 
 port = int(os.environ.get("PORT", 5000))
 if __name__ == "__main__":
