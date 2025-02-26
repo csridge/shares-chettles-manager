@@ -1,11 +1,19 @@
+from flask import Blueprint
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import threading
 import login
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///chess_inventory.db"
-db = SQLAlchemy(app)
+
+from flask import Blueprint
+from main import db  # Import `db` from `main.py`
+from main import app
+
+login_app = Blueprint("login", __name__)
+
+@login_app.route("/login")
+def login():
+    return "Login page"
 
 class Inventory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
